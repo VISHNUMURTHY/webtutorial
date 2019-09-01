@@ -1,0 +1,9 @@
+<header class="header">
+  <img class="logo" src="../../assets/images/blank.png" alt="Logo"/>
+
+    <input type="search" [(ngModel)]="searchKey" placeholder="Search text">
+
+    <ul *ngFor="let data of searchKeys | searchFilter: searchKey">
+      <li>{{data}}</li>
+    </ul>
+</header>
