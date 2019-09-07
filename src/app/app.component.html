@@ -1,7 +1,16 @@
-<app-header></app-header>
+<header class="base-header">
+	<app-header></app-header>
+</header>
 
-<app-navigation></app-navigation>
+<nav class="base-nav">
+	<app-navigation></app-navigation>
+</nav>
 
-<app-footer></app-footer>
+<main class="content"> 
+	<router-outlet></router-outlet>
+</main>
 
-<router-outlet></router-outlet>
+<footer class="base-footer">
+	<app-footer></app-footer>
+</footer>
+
