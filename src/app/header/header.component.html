@@ -1,16 +1,16 @@
 <header class="header">
 	<img class="logo" src="../../assets/images/blank.png" alt="Logo" />
 
-	<form class="input-form">
+	<!--  form class="input-form">
 		<mat-form-field class="search-option"> 
 			<input type="text" placeholder="Search Here" aria-label="Number" matInput
 			[formControl]="myControl" [matAutocomplete]="auto">
 			<mat-autocomplete #auto="matAutocomplete">
-				<mat-option	*ngFor="let option of filteredOptions | async" [value]="option">
+				<mat-option	class="options" *ngFor="let option of filteredOptions | async" [value]="option">
 					{{option}}
 				</mat-option>
 			</mat-autocomplete>
 		</mat-form-field>
-	</form>
+	</form>-->
 
 </header>
