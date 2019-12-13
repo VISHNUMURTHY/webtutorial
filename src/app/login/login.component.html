@@ -1,0 +1,22 @@
+<div class="display-image">
+    <h1>{{loginFlag ? 'Login' : 'Register'}}</h1>
+    <h6>{{loginFlag ? login : register}}</h6>
+</div>
+<div class="login-div">
+    <div class="form-div">
+        <form [formControl]="loginControl" class="form-class">
+            <mat-form-field class="form-mat-class">
+                <input matInput type="text" placeholder="Enter Email/Mobile Number" required>
+            </mat-form-field>
+            <mat-form-field class="form-mat-class">
+                <input matInput type="password" placeholder="Password" required>
+            </mat-form-field>
+            <button mat-raised-button type="submit">{{loginFlag ? 'Login' :
+                'Register'}}</button>
+        </form>
+    </div>
+    <div class="form-button">
+        <button mat-flat-button (click)='loginFlag=!loginFlag'>{{loginFlag ? displayRegister :
+            displayLogin}}</button>
+    </div>
+</div>

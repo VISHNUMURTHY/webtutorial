@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Constants } from '../utilities/constants/Constants';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'web-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.less']
 })
