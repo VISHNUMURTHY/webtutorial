@@ -1,0 +1,9 @@
+<form [formControl]="loginControl">
+        <mat-form-field>
+            <input matInput type="text" placeholder="Search Here" [matAutocomplete]="auto" [(ngModel)]="searchValue"
+             >
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onSubmit(searchValue)" type="submit">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>

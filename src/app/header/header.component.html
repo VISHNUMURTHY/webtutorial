@@ -1,16 +1,23 @@
 <header class="header">
 	<img class="logo" src="../../assets/images/blank.png" alt="Logo" />
 
-	<!--  form class="input-form">
-		<mat-form-field class="search-option"> 
-			<input type="text" placeholder="Search Here" aria-label="Number" matInput
-			[formControl]="myControl" [matAutocomplete]="auto">
-			<mat-autocomplete #auto="matAutocomplete">
-				<mat-option	class="options" *ngFor="let option of filteredOptions | async" [value]="option">
-					{{option}}
-				</mat-option>
-			</mat-autocomplete>
-		</mat-form-field>
-	</form>-->
-
+	<div class="search-option">
+		<form class="search-form">
+			<mat-form-field class="search-form" appearance="outline">
+				<input matInput type="text" placeholder="Search Here" [matAutocomplete]="auto" [(ngModel)]="searchValue"
+				 [formControl]="searchControl">
+				<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="searchValue">
+					<mat-icon>search</mat-icon>
+				</button>
+				<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedOption(searchValue)">
+					<mat-option class="options" *ngFor="let option of filteredOptions | async" [value]="option">
+						{{option}}
+					</mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+		</form>
+		<button mat-raised-button (click)="loginResigter()">
+			Login/Register
+		</button>
+	</div>
 </header>

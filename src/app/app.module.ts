@@ -16,6 +16,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ContactUsDetailsComponent } from './contact-us-details/contact-us-details.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,19 +29,20 @@ import { ContactUsDetailsComponent } from './contact-us-details/contact-us-detai
     ContactUsComponent,
     HomeComponent,
     NavigationComponent,
-    ContactUsDetailsComponent
+    ContactUsDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-	ReactiveFormsModule,
-	HttpClientModule,
+	  ReactiveFormsModule,
+	  HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule
   ],
   providers: [],
-  entryComponents: [ContactUsDetailsComponent],
+  entryComponents: [ContactUsDetailsComponent, LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
