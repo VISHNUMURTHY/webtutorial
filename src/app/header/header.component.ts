@@ -50,8 +50,9 @@ export class HeaderComponent implements OnInit {
   loginResigter() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    dialogConfig.width = '55%';
-    dialogConfig.height = '75%';
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = '50%';
+    dialogConfig.height = '65%';
     dialogConfig.closeOnNavigation = true;
     this.matDialog.open(LoginRegisterComponent, dialogConfig);
   }

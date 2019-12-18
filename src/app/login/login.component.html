@@ -1,22 +1,78 @@
-<div class="display-image">
-    <h1>{{loginFlag ? 'Login' : 'Register'}}</h1>
-    <h6>{{loginFlag ? login : register}}</h6>
-</div>
-<div class="login-div">
-    <div class="form-div">
-        <form [formControl]="loginControl" class="form-class">
-            <mat-form-field class="form-mat-class">
-                <input matInput type="text" placeholder="Enter Email/Mobile Number" required>
-            </mat-form-field>
-            <mat-form-field class="form-mat-class">
-                <input matInput type="password" placeholder="Password" required>
-            </mat-form-field>
-            <button mat-raised-button type="submit">{{loginFlag ? 'Login' :
-                'Register'}}</button>
-        </form>
+<div class="display-login-page">
+    <div class="display-image">
+        <h1>{{loginFlag ? 'Login' : 'Register'}}</h1>
+        <h6>{{loginFlag ? loginMessage : registerMessage}}</h6>
     </div>
-    <div class="form-button">
-        <button mat-flat-button (click)='loginFlag=!loginFlag'>{{loginFlag ? displayRegister :
-            displayLogin}}</button>
+    <div class="login-div">
+        <form *ngIf="loginFlag && !forgotFlag" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" class="form-class"
+            autocomplete="off">
+            <mat-form-field class="form-mat-class">
+                <input matInput type="text" placeholder="Enter Email/Mobile Number" formControlName="username" required
+                    web-BlockCopyPaste>
+                <mat-error *ngFor="let validation of loginMessages.username">
+                    <mat-error class="error-message" *ngIf="loginForm.get('username').hasError(validation.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">{{validation.message}}</mat-error>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-mat-class">
+                <input matInput [type]="hide ? 'text' : 'password'" placeholder="Password" formControlName="password"
+                    required web-BlockCopyPaste>
+                <button matSuffix mat-icon-button (click)="hide = !hide">
+                    <mat-icon>{{hide? 'visibility':'visibility_off'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <div class="forgot-password" (click)="forgotPassword()">Forgot Password?</div>
+            <button mat-raised-button type="submit" class="submit-button" [disabled]="!loginForm.valid">Login</button>
+        </form>
+
+        <form *ngIf="forgotFlag && loginFlag" [formGroup]="forgotForm" (ngSubmit)="resetPassword(forgotForm.value)"
+            class="form-class">
+            <mat-form-field class="form-mat-class">
+                <input matInput type="text" placeholder="Enter Email/Mobile Number" formControlName="username" required>
+            </mat-form-field>
+            <div *ngIf="newUser" (click)="validateRegisterUser(username)">Continue</div>
+            <div *ngIf="!newUser">
+                <div>
+                    <span>OTP sent to Mobile</span>
+                    <span>Resend?</span>
+                </div>
+                <mat-form-field class="form-mat-class">
+                    <input matInput type="text" placeholder="Enter OTP" formControlName="otp" required
+                        web-BlockCopyPaste>
+                </mat-form-field>
+                <mat-form-field class="form-mat-class">
+                    <input matInput type="password" placeholder="Set Password" formControlName="newpassword" required
+                        web-BlockCopyPaste>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button type="submit" class="submit-button">Login</button>
+        </form>
+
+        <!-- <form *ngIf="!loginFlag" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)" class="form-class"
+            autocomplete="off">
+            <mat-form-field class="form-mat-class">
+                <input matInput type="text" placeholder="Enter Mobile Number" formControlName="username" required
+                    web-BlockCopyPaste>
+            </mat-form-field>
+            <div *ngIf="newUser" (click)="validateRegisterUser(username)">Continue</div>
+            <div *ngIf="!newUser">
+                <div>
+                    <span>OTP sent to Mobile</span>
+                    <span> Resend?</span>
+                </div>
+                <mat-form-field class="form-mat-class">
+                    <input matInput type="text" placeholder="Enter OTP" formControlName="otp" required
+                        web-BlockCopyPaste>
+                </mat-form-field>
+                <mat-form-field class="form-mat-class">
+                    <input matInput type="password" placeholder="Set Password" formControlName="newpassword" required
+                        web-BlockCopyPaste>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button type="submit" class="submit-button">Register</button>
+        </form> -->
+        <div class="form-button">
+            <button mat-flat-button (click)='loginFlag=!loginFlag'>{{loginFlag ? displayRegister :
+                displayLogin}}</button>
+        </div>
     </div>
 </div>

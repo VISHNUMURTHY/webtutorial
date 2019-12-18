@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ContactUsDetailsComponent } from './contact-us-details/contact-us-details.component';
 import { LoginRegisterComponent } from './login/login.component';
+import { BlockCopyPasteDirective } from './directives/block-copy-paste.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoginRegisterComponent } from './login/login.component';
     HomeComponent,
     NavigationComponent,
     ContactUsDetailsComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    BlockCopyPasteDirective
   ],
   imports: [
     BrowserModule,
