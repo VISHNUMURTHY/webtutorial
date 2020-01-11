@@ -1,0 +1,8 @@
+<form [formGroup]="resistanceForm" (ngSubmit)="resistance(resistanceForm.value)" class="form-class"
+            autocomplete="off">
+            <mat-form-field class="form-mat-class">
+                <input matInput type="text" placeholder="Enter resistance value" formControlName="series" required>
+            </mat-form-field>
+            
+            <button mat-raised-button type="submit" class="submit-button">Calculate</button>
+        </form>

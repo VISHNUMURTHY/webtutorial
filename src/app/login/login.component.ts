@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatCardModule, MatDialogRef } from '@angular/material';
-import { ValidationMessages } from './validations/login.validations';
+import { ValidationMessages, UsernameValidator } from './validations/login.validations';
 
 import { Constants } from '../utilities/constants/Constants';
 
@@ -16,11 +16,15 @@ import { Constants } from '../utilities/constants/Constants';
   preserveWhitespaces: false,
 })
 export class LoginRegisterComponent implements OnInit {
+
+  @ViewChild("userFocus", { static: false }) userFocus: ElementRef;
+
   loginForm;
   forgotForm;
   loginFlag = true;
-  forgotFlag =false;
+  forgotFlag = false;
   newUser = true;
+  usernameSuffix = false;
   registerMessage = 'To get complete access for content';
   loginMessage = 'To get latest updates/notifications';
   displayLogin = 'Already Registered User!';
@@ -31,7 +35,7 @@ export class LoginRegisterComponent implements OnInit {
   constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, private matDialogRef: MatDialogRef<LoginRegisterComponent>) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.compose([
-        Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')
+        Validators.required, UsernameValidator.validUsername
       ])],
       password: ['', Validators.required]
     });
@@ -45,7 +49,9 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.loginForm.get('username').valueChanges.subscribe(value => {
+      value === '' ? this.usernameSuffix = false : isNaN(value) ? this.usernameSuffix = false : this.usernameSuffix = true;
+    });
   }
 
 
@@ -63,19 +69,31 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   forgotPassword() {
-    this.forgotFlag=true;
+    if (this.loginForm.get('username').hasError('required') || this.loginForm.get('username').hasError('validUsernameEmail') || this.loginForm.get('username').hasError('validUsernameMobile')) {
+      this.forgotFlag = false;
+      this.userFocus.nativeElement.focus();
+    } else {
+      this.forgotFlag = true;
+      this.forgotForm.controls['username'].setValue(this.loginForm.get('username').value);
+      this.forgotForm.controls['username'].disable();
+    }
   }
 
-  resetPassword(value){
-    console.log(value); 
+  edit() {
+    this.forgotFlag = false;
+    this.loginForm.controls['password'].reset();
+  }
+
+  resetPassword(value) {
+    console.log(value);
     console.log(this.forgotForm);
   }
 
-  validateRegisterUser(username){
+  validateRegisterUser(username) {
     console.log(username);
   }
 
-  register(value){
+  register() {
 
   }
 

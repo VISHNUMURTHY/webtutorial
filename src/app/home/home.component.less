@@ -1,3 +1,54 @@
-p{
-margin:0px;
+p {
+  margin: 0px;
+}
+
+.samples {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.sample {
+  width: 200px;
+  height: 200px;
+  border: dashed 2px gray;
+  margin: 30px;
+
+  overflow: hidden;
+}
+
+.small {
+  width: 100px;
+  height: 20px;
+}
+
+.samples.flex .sample,
+.samples.flex .small {
+  flex: 1;
+  width: inherit;
+  height: 100px;
+}
+
+.samples.flex .sample:hover,
+.samples.flex .small:hover {
+  resize: vertical;
+}
+
+.longText {
+  width: 200px;
+  margin: 30px;
+}
+
+.ngx-ellipsis-more {
+  padding-left: 3px;
+}
+
+.comment-more {
+  opacity: 0.75;
+  font-family: Roboto-Medium;
+  font-size: 16px;
+  color: #000000;
+  text-align: right;
+  font-weight: 600;
+  text-decoration: none;
 }

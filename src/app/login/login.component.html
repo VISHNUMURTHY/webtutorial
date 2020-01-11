@@ -1,3 +1,6 @@
+<button matSuffix mat-icon-button mat-dialog-close class="close-button">
+    <mat-icon>close</mat-icon>
+</button>
 <div class="display-login-page">
     <div class="display-image">
         <h1>{{loginFlag ? 'Login' : 'Register'}}</h1>
@@ -7,8 +10,9 @@
         <form *ngIf="loginFlag && !forgotFlag" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" class="form-class"
             autocomplete="off">
             <mat-form-field class="form-mat-class">
-                <input matInput type="text" placeholder="Enter Email/Mobile Number" formControlName="username" required
-                    web-BlockCopyPaste>
+                <span *ngIf="usernameSuffix" matPrefix>+91 &nbsp;</span>
+                <input matInput type="text" placeholder="Enter Email/Mobile Number"
+                    formControlName="username" required web-BlockCopyPaste #userFocus>
                 <mat-error *ngFor="let validation of loginMessages.username">
                     <mat-error class="error-message" *ngIf="loginForm.get('username').hasError(validation.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">{{validation.message}}</mat-error>
                 </mat-error>
@@ -19,15 +23,24 @@
                 <button matSuffix mat-icon-button (click)="hide = !hide">
                     <mat-icon>{{hide? 'visibility':'visibility_off'}}</mat-icon>
                 </button>
+                <mat-error *ngFor="let validation of loginMessages.password">
+                    <mat-error class="error-message" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">{{validation.message}}</mat-error>
+                </mat-error>
             </mat-form-field>
-            <div class="forgot-password" (click)="forgotPassword()">Forgot Password?</div>
+            <div class="forgot-password">
+                <div (click)="forgotPassword()">Forgot Password?</div>
+            </div>
             <button mat-raised-button type="submit" class="submit-button" [disabled]="!loginForm.valid">Login</button>
         </form>
 
         <form *ngIf="forgotFlag && loginFlag" [formGroup]="forgotForm" (ngSubmit)="resetPassword(forgotForm.value)"
             class="form-class">
             <mat-form-field class="form-mat-class">
+                <span *ngIf="usernameSuffix" matPrefix>+91 &nbsp;</span>
                 <input matInput type="text" placeholder="Enter Email/Mobile Number" formControlName="username" required>
+                <button matSuffix mat-icon-button (click)="edit()">
+                    <mat-icon>mode_edit</mat-icon>
+                </button>
             </mat-form-field>
             <div *ngIf="newUser" (click)="validateRegisterUser(username)">Continue</div>
             <div *ngIf="!newUser">
@@ -71,7 +84,8 @@
             <button mat-raised-button type="submit" class="submit-button">Register</button>
         </form> -->
         <div class="form-button">
-            <button mat-flat-button (click)='loginFlag=!loginFlag'>{{loginFlag ? displayRegister :
+            <button mat-flat-button (click)='loginFlag=!loginFlag' [disableRipple]="true">{{loginFlag ? displayRegister
+                :
                 displayLogin}}</button>
         </div>
     </div>

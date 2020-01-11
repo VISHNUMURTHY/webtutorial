@@ -18,6 +18,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ContactUsDetailsComponent } from './contact-us-details/contact-us-details.component';
 import { LoginRegisterComponent } from './login/login.component';
 import { BlockCopyPasteDirective } from './directives/block-copy-paste.directive';
+import {EllipsisDirective} from './directives/ellipsis';
+import { ElectricalComponentsComponent } from './electrical-components/electrical-components.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { BlockCopyPasteDirective } from './directives/block-copy-paste.directive
     NavigationComponent,
     ContactUsDetailsComponent,
     LoginRegisterComponent,
-    BlockCopyPasteDirective
+    BlockCopyPasteDirective,
+    EllipsisDirective,
+    ElectricalComponentsComponent
   ],
   imports: [
     BrowserModule,
