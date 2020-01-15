@@ -29,8 +29,10 @@ export class LoginRegisterComponent implements OnInit {
   loginMessage = 'To get latest updates/notifications';
   displayLogin = 'Already Registered User!';
   displayRegister = 'New User? Register Here';
+  passwordTooltip = 'Password must be combination of Capital Letter, Small Letter, Number and Special Characters[!@#$%&*]';
 
   loginMessages = ValidationMessages.login_validation_messages;
+  forgotMessages = ValidationMessages.forgot_validation_messages;
 
   constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, private matDialogRef: MatDialogRef<LoginRegisterComponent>) {
     this.loginForm = this.formBuilder.group({
@@ -41,10 +43,13 @@ export class LoginRegisterComponent implements OnInit {
     });
 
     this.forgotForm = this.formBuilder.group({
-      username: ['', Validators.compose([
-        Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')
+      username: [''],
+      otp: ['', Validators.compose([
+        Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(6)
       ])],
-      password: ['', Validators.required]
+      password: ['', Validators.compose([
+        Validators.required, Validators.minLength(6), Validators.pattern('^[a-z][A-Z][0-9][!@#$%&*]+$')
+      ])]
     });
   }
 
@@ -87,6 +92,10 @@ export class LoginRegisterComponent implements OnInit {
   resetPassword(value) {
     console.log(value);
     console.log(this.forgotForm);
+  }
+
+  resendOtp(){
+
   }
 
   validateRegisterUser(username) {

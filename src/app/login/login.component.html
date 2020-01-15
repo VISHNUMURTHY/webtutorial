@@ -11,8 +11,8 @@
             autocomplete="off">
             <mat-form-field class="form-mat-class">
                 <span *ngIf="usernameSuffix" matPrefix>+91 &nbsp;</span>
-                <input matInput type="text" placeholder="Enter Email/Mobile Number"
-                    formControlName="username" required web-BlockCopyPaste #userFocus>
+                <input matInput type="text" placeholder="Enter Email/Mobile Number" formControlName="username" required
+                    web-BlockCopyPaste #userFocus>
                 <mat-error *ngFor="let validation of loginMessages.username">
                     <mat-error class="error-message" *ngIf="loginForm.get('username').hasError(validation.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">{{validation.message}}</mat-error>
                 </mat-error>
@@ -42,22 +42,30 @@
                     <mat-icon>mode_edit</mat-icon>
                 </button>
             </mat-form-field>
-            <div *ngIf="newUser" (click)="validateRegisterUser(username)">Continue</div>
-            <div *ngIf="!newUser">
+            <div class="align-items-column">
                 <div>
-                    <span>OTP sent to Mobile</span>
-                    <span>Resend?</span>
+                    <span>OTP sent to Mobile/Email</span>
+                    <span class="resend-otp" (click)="resendOtp()">Resend?</span>
                 </div>
                 <mat-form-field class="form-mat-class">
-                    <input matInput type="text" placeholder="Enter OTP" formControlName="otp" required
+                    <input matInput type="text" placeholder="Enter OTP" formControlName="otp" maxlength="6" required
                         web-BlockCopyPaste>
+                        <mat-error *ngFor="let validation of forgotMessages.otp">
+                            <mat-error class="error-message" *ngIf="forgotForm.get('otp').hasError(validation.type) && (forgotForm.get('otp').dirty || forgotForm.get('otp').touched)">{{validation.message}}</mat-error>
+                        </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-mat-class">
-                    <input matInput type="password" placeholder="Set Password" formControlName="newpassword" required
+                    <input matInput type="password" placeholder="Set Password" formControlName="password" required
                         web-BlockCopyPaste>
+                    <button mat-icon-button matSuffix>
+                        <mat-icon matTooltip="{{passwordTooltip}}" matTooltipClass="passwordInfo">info</mat-icon>
+                    </button>
+                    <mat-error *ngFor="let validation of forgotMessages.password">
+                        <mat-error class="error-message" *ngIf="forgotForm.get('password').hasError(validation.type) && (forgotForm.get('password').dirty || forgotForm.get('password').touched)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </div>
-            <button mat-raised-button type="submit" class="submit-button">Login</button>
+            <button mat-raised-button type="submit" class="submit-button" [disabled]="!forgotForm.valid">Login</button>
         </form>
 
         <!-- <form *ngIf="!loginFlag" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)" class="form-class"
