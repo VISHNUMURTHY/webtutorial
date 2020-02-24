@@ -20,6 +20,7 @@ import { LoginRegisterComponent } from './login/login.component';
 import { BlockCopyPasteDirective } from './directives/block-copy-paste.directive';
 import {EllipsisDirective} from './directives/ellipsis';
 import { ElectricalComponentsComponent } from './electrical-components/electrical-components.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ElectricalComponentsComponent } from './electrical-components/electrica
     LoginRegisterComponent,
     BlockCopyPasteDirective,
     EllipsisDirective,
-    ElectricalComponentsComponent
+    ElectricalComponentsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

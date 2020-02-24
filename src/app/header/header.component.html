@@ -2,22 +2,26 @@
 	<img class="logo" src="../../assets/images/blank.png" alt="Logo" />
 
 	<div class="search-option">
-		<form class="search-form">
-			<mat-form-field class="search-form" appearance="outline">
-				<input matInput type="text" placeholder="Search Here" [matAutocomplete]="auto" [(ngModel)]="searchValue"
-				 [formControl]="searchControl">
-				<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="searchValue">
-					<mat-icon>search</mat-icon>
-				</button>
-				<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedOption(searchValue)">
-					<mat-option class="options" *ngFor="let option of filteredOptions | async" [value]="option">
-						{{option}}
-					</mat-option>
+		<!-- <form class="search-form">
+			<mat-form-field class="search-form">
+				<input matInput type="text" placeholder="Search Here" [matAutocomplete]="auto" [formControl]="searchControl">
+				<mat-icon *ngIf="!noResult" matSuffix>search</mat-icon>
+				<mat-icon *ngIf="noResult" matSuffix (click)="searchReset()">close</mat-icon>
+				<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedOption($event.option.value)">
+					<ng-container *ngIf="!noResult">
+						<mat-option class="options" *ngFor="let option of filteredOptions | async" [value]="option">
+							{{option}}
+						</mat-option>
+					</ng-container>
+					<ng-container *ngIf="noResult">
+							<mat-option disabled>No Results Found</mat-option>
+						</ng-container>
 				</mat-autocomplete>
 			</mat-form-field>
-		</form>
-		<button mat-raised-button (click)="loginResigter()">
-			Login/Register
-		</button>
+		</form> -->
+		<web-search></web-search>
 	</div>
+
+	<button mat-raised-button (click)="loginResigter()">Login/Register</button>
+
 </header>

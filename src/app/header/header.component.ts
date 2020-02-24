@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { map } from 'rxjs/operators';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { Constants } from '../utilities/constants/Constants';
 import { LoginRegisterComponent } from '../login/login.component';
@@ -19,7 +18,6 @@ import { LoginRegisterComponent } from '../login/login.component';
 export class HeaderComponent implements OnInit {
 
   searchControl = new FormControl();
-  searchValue: string;
   options: string[];
   noResult: boolean;
   filteredOptions: Observable<string[]>;
@@ -31,16 +29,24 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.filteredOptions = this.searchControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => value.length < 1 ? [] : this._filter(value).length > 0 ? this._filter(value) : [])
-      );
+    this.filteredOptions = this.searchControl.valueChanges.pipe(
+      map(value => value.length < 1 ? this.noResults(value) : this._filter(value).length > 0 ? this._filter(value) : this.noResults(value))
+    );
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
+    this.noResult = false;
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  noResults(val: any) {
+    if (val === '' || val === null || val === undefined) {
+      this.noResult = false;
+    } else {
+      this.noResult = true;
+    }
+    return [];
   }
 
   selectedOption(value) {
@@ -57,4 +63,7 @@ export class HeaderComponent implements OnInit {
     this.matDialog.open(LoginRegisterComponent, dialogConfig);
   }
 
+  searchReset() {
+    this.searchControl.reset();
+  }
 }
