@@ -17,7 +17,7 @@ import { Constants } from '../utilities/constants/Constants';
 })
 export class LoginRegisterComponent implements OnInit {
 
-  @ViewChild("userFocus", { static: false }) userFocus: ElementRef;
+  @ViewChild("userFocus") userFocus: ElementRef;
 
   loginForm: any;
   forgotForm: any;

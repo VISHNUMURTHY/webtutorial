@@ -9,14 +9,21 @@ import { FormBuilder, Validators } from '@angular/forms';
   preserveWhitespaces: false,
 })
 export class ElectricalComponentsComponent implements OnInit {
-  resistanceForm;
-  
-  constructor() { }
+  resistanceForm: any;
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.initializeForms();
   }
 
-  resistance(value){
-    
+  initializeForms() {
+    this.resistanceForm = this.fb.group({
+      series: ['']
+    })
+  }
+
+  resistance(value) {
+
   }
 }

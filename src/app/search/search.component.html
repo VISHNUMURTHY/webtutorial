@@ -1,6 +1,5 @@
 <form>
     <mat-icon matPreffix color="primary">search</mat-icon>
-    <input type="search">
-    <mat-icon matPreffix color="primary">mic</mat-icon>
-
+    <input type="search" [formControl]="searchForm">
+    <mat-icon matPreffix aria-hidden="false" svgIcon="mic-sound"></mat-icon>
 </form>
